@@ -1,0 +1,6 @@
+.dashboards-grid {
+  padding: var(--pf-v5-global--spacer--md);
+  display: grid;
+  gap: var(--pf-v5-global--spacer--md);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}

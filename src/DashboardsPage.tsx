@@ -1,10 +1,19 @@
-import { Flex, PageSection, PageSectionVariants } from "@patternfly/react-core";
+import { PageSection, PageSectionVariants } from "@patternfly/react-core";
 import React from "react";
 import { listDashboards } from "./services/dashboardsService";
+import { Panel } from "./Panel";
+import "./DashboardsPage.css";
 
 interface Dashboard {
   id: string;
   name: string;
+  description: string;
+  panels: {
+    id: string;
+    name: string;
+    description: string;
+    query: string;
+  }[];
 }
 
 const DashboardsPage = () => {
@@ -23,13 +32,18 @@ const DashboardsPage = () => {
       <PageSection variant={PageSectionVariants.light}>
         Default Dashboard
       </PageSection>
-      <div className="pf-v5-u-p-md">
-        <Flex
-          gap={{ default: "gapMd" }}
-          justifyContent={{ default: "justifyContentCenter" }}
-        >
-          {/* TODO: Add dashboard panels */}
-        </Flex>
+      <div className="dashboards-grid">
+        {currentDashboard &&
+          currentDashboard.panels.map((panel) => {
+            return (
+              <Panel
+                key={panel.name}
+                name={panel.name}
+                description={panel.description}
+                query={panel.query}
+              />
+            );
+          })}
       </div>
     </main>
   );
